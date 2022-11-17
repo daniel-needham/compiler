@@ -1,0 +1,3 @@
+rootProject.name = 'compilers-cw'
+include 'task1'
+include 'task2'
