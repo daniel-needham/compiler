@@ -1,4 +1,4 @@
-grammar simplelang;
+grammar simpleLang;
 
 prog: dec+ EOF
     ;

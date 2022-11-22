@@ -1,111 +1,111 @@
-// Generated from /home/dan/Uni Work/Compilers/assignment/246619/task1/src/simplelang.g4 by ANTLR 4.10.1
+// Generated from /home/dan/Uni Work/Compilers/assignment/246619/task1/src/simpleLang.g4 by ANTLR 4.10.1
 
 import org.antlr.v4.runtime.ParserRuleContext;
 import org.antlr.v4.runtime.tree.ErrorNode;
 import org.antlr.v4.runtime.tree.TerminalNode;
 
 /**
- * This class provides an empty implementation of {@link simplelangListener},
+ * This class provides an empty implementation of {@link simpleLangListener},
  * which can be extended to create a listener which only needs to handle a subset
  * of the available methods.
  */
-public class simplelangBaseListener implements simplelangListener {
+public class simpleLangBaseListener implements simpleLangListener {
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterProg(simplelangParser.ProgContext ctx) { }
+	@Override public void enterProg(simpleLangParser.ProgContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitProg(simplelangParser.ProgContext ctx) { }
+	@Override public void exitProg(simpleLangParser.ProgContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterDec(simplelangParser.DecContext ctx) { }
+	@Override public void enterDec(simpleLangParser.DecContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitDec(simplelangParser.DecContext ctx) { }
+	@Override public void exitDec(simpleLangParser.DecContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterVardec(simplelangParser.VardecContext ctx) { }
+	@Override public void enterVardec(simpleLangParser.VardecContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitVardec(simplelangParser.VardecContext ctx) { }
+	@Override public void exitVardec(simpleLangParser.VardecContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterBody(simplelangParser.BodyContext ctx) { }
+	@Override public void enterBody(simpleLangParser.BodyContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitBody(simplelangParser.BodyContext ctx) { }
+	@Override public void exitBody(simpleLangParser.BodyContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterBlock(simplelangParser.BlockContext ctx) { }
+	@Override public void enterBlock(simpleLangParser.BlockContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitBlock(simplelangParser.BlockContext ctx) { }
+	@Override public void exitBlock(simpleLangParser.BlockContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterEne(simplelangParser.EneContext ctx) { }
+	@Override public void enterEne(simpleLangParser.EneContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitEne(simplelangParser.EneContext ctx) { }
+	@Override public void exitEne(simpleLangParser.EneContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterExp(simplelangParser.ExpContext ctx) { }
+	@Override public void enterExp(simpleLangParser.ExpContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitExp(simplelangParser.ExpContext ctx) { }
+	@Override public void exitExp(simpleLangParser.ExpContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterArgs(simplelangParser.ArgsContext ctx) { }
+	@Override public void enterArgs(simpleLangParser.ArgsContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitArgs(simplelangParser.ArgsContext ctx) { }
+	@Override public void exitArgs(simpleLangParser.ArgsContext ctx) { }
 
 	/**
 	 * {@inheritDoc}

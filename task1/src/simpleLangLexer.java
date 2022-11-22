@@ -1,4 +1,4 @@
-// Generated from /home/dan/Uni Work/Compilers/assignment/246619/task1/src/simplelang.g4 by ANTLR 4.10.1
+// Generated from /home/dan/Uni Work/Compilers/assignment/246619/task1/src/simpleLang.g4 by ANTLR 4.10.1
 import org.antlr.v4.runtime.Lexer;
 import org.antlr.v4.runtime.CharStream;
 import org.antlr.v4.runtime.Token;
@@ -9,7 +9,7 @@ import org.antlr.v4.runtime.dfa.DFA;
 import org.antlr.v4.runtime.misc.*;
 
 @SuppressWarnings({"all", "warnings", "unchecked", "unused", "cast"})
-public class simplelangLexer extends Lexer {
+public class simpleLangLexer extends Lexer {
 	static { RuntimeMetaData.checkVersion("4.10.1", RuntimeMetaData.VERSION); }
 
 	protected static final DFA[] _decisionToDFA;
@@ -87,13 +87,13 @@ public class simplelangLexer extends Lexer {
 	}
 
 
-	public simplelangLexer(CharStream input) {
+	public simpleLangLexer(CharStream input) {
 		super(input);
 		_interp = new LexerATNSimulator(this,_ATN,_decisionToDFA,_sharedContextCache);
 	}
 
 	@Override
-	public String getGrammarFileName() { return "simplelang.g4"; }
+	public String getGrammarFileName() { return "simpleLang.g4"; }
 
 	@Override
 	public String[] getRuleNames() { return ruleNames; }
