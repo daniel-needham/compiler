@@ -1,3 +1,4 @@
+import org.antlr.v4.runtime.RuleContext;
 import org.antlr.v4.runtime.tree.AbstractParseTreeVisitor;
 
 import java.util.*;
@@ -16,6 +17,13 @@ public class simpleLangChecker extends AbstractParseTreeVisitor<Type> implements
             valid = variablePairs.add(thisPair);
         }
         return valid;
+    }
+
+    private String getDecParentAsString(RuleContext ctx) {
+        while (! (ctx instanceof simpleLangParser.DecContext)) {
+            ctx = ctx.getParent();
+        }
+        return ((simpleLangParser.DecContext) ctx).IDFR().getText();
     }
 
     @Override
@@ -42,7 +50,8 @@ public class simpleLangChecker extends AbstractParseTreeVisitor<Type> implements
             throw new TypeException().duplicatedFuncError();
         } else {
             Set<VariablePair> li = new LinkedHashSet<>();
-            li.add(new VariablePair(ctx.IDFR().getText(), Type.returnType(ctx.TYPE().getText())));
+            //do i need to add func name to local variables?
+            //li.add(new VariablePair(ctx.IDFR().getText(), Type.returnType(ctx.TYPE().getText())));
             symbolTable.put(ctx.IDFR().getText(), li);
         }
 
@@ -51,8 +60,7 @@ public class simpleLangChecker extends AbstractParseTreeVisitor<Type> implements
         return Type.UNIT;
     }
     public Type visitVardec(simpleLangParser.VardecContext ctx) {
-        simpleLangParser.DecContext parent = (simpleLangParser.DecContext) ctx.getParent();
-        String parentName = parent.IDFR().getText();
+        String parentName = this.getDecParentAsString(ctx);
         System.out.println(parentName);
         for (int i = 0; i < ctx.IDFR().size(); i++) {
             String type = ctx.TYPE(i).getText();
@@ -67,27 +75,51 @@ public class simpleLangChecker extends AbstractParseTreeVisitor<Type> implements
 
     @Override
     public Type visitBody(simpleLangParser.BodyContext ctx) {
-        return null;
+        String parentName = this.getDecParentAsString(ctx);
+        for (int i = 0; i < ctx.IDFR().size(); i++) {
+            String type = ctx.TYPE(i).getText();
+            String idfr = ctx.IDFR(i).getText();
+            boolean addedToVars = addToLocalVariablesIfValid(idfr, type, parentName);
+            if (addedToVars == false) {
+                throw new TypeException().duplicatedVarError();
+            }
+            if(Type.returnType(type) != visit(ctx.exp(i))) {
+                throw new TypeException().assignmentError();
+            }
+        }
+        visit(ctx.ene());
+        return Type.UNIT;
     }
 
     @Override
     public Type visitBlock(simpleLangParser.BlockContext ctx) {
-        return null;
+        return visit(ctx.ene());
     }
 
     @Override
     public Type visitEne(simpleLangParser.EneContext ctx) {
-        return null;
+        for (int i = 0; i < ctx.exp().size(); i++) {
+            visit(ctx.exp(i));
+        }
+        return Type.UNIT;
     }
 
     @Override
     public Type visitIDFREXP(simpleLangParser.IDFREXPContext ctx) {
+        //need to find parent dec
+      /*  Object parent = ctx.getParent();
+        while (!(parent instanceof simpleLangParser.DecContext))
+        {
+            parent = (simpleLangParser) parent.getParent();
+        }
+        if(){
+            throw new TypeException().undefinedVarError();
+        }*/
         return null;
     }
-
     @Override
     public Type visitINTEXP(simpleLangParser.INTEXPContext ctx) {
-        return null;
+        return Type.INT;
     }
 
     @Override

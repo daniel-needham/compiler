@@ -1,0 +1,154 @@
+=========Failed Test for Task 1=========
+Input (../tester/tests_task1/g001.simp):
+int fun(int x,int y,int z) { if (x == y) then { z } else { 0 } }
+int main() { fun3(1, 2, 3) }
+unit fun2() { skip }
+========================================
+Student Output:
+Duplicated function names
+========================================
+Expected Output:
+Unknown function name
+=========Failed Test for Task 1=========
+Input (../tester/tests_task1/e011.simp):
+int main(int n, int d) {
+  collatzA(n, d)
+}
+
+int collatzA(int qoz29, int depth) {
+  int main := 0;
+  if (qoz29 == 4)
+  then { print qoz29; print space; depth }
+  else {
+    if ((2*(qoz29 / 2)) == qoz29)
+    then { print qoz29; print space; collatzA((qoz29 / 2), (depth + 1)) }
+    else { print qoz29; print space; collatzA(((qoz29 * 3) + 1), (depth + 1)) }
+  }
+}
+========================================
+Student Output:
+========================================
+Expected Output:
+A variable name clashed with a function name
+=========Failed Test for Task 1=========
+Input (../tester/tests_task1/a001.simp):
+int fun(int x,int y,int z) { if (x == y) then { z } else { 0 } }
+int main1() { fun(1, 2, 3) }
+unit fun2() { skip }
+========================================
+Student Output:
+Duplicated function names
+========================================
+Expected Output:
+No main function defined
+=========Failed Test for Task 1=========
+Input (../tester/tests_task1/f011.simp):
+int main(int n, int d) {
+  collatzA(n, d)
+}
+
+int collatzA(int qoz29, int depth) {
+  unit sp := space;
+  if (qoz29 == 4)
+  then { print qoz29; print space; depth }
+  else {
+    if ((2*(qoz29 / 2)) == qoz29)
+    then { print qoz29; print space; collatzA((qoz29 / 2), (depth + 1)) }
+    else { print qoz29; print space; collatzA(((qoz29 * 3) + 1), (depth + 1)) }
+  }
+}
+========================================
+Student Output:
+========================================
+Expected Output:
+Variable of unit type
+=========Failed Test for Task 1=========
+Input (../tester/tests_task1/a011.simp):
+int mainb(int n, int d) {
+  collatzA(n, d)
+}
+
+int collatzA(int qoz29, int depth) {
+  if (qoz29 == 4)
+  then { print qoz29; print space; depth }
+  else {
+    if ((2*(qoz29 / 2)) == qoz29)
+    then { print qoz29; print space; collatzA((qoz29 / 2), (depth + 1)) }
+    else { print qoz29; print space; collatzA(((qoz29 * 3) + 1), (depth + 1)) }
+  }
+}
+========================================
+Student Output:
+========================================
+Expected Output:
+No main function defined
+=========Failed Test for Task 1=========
+Input (../tester/tests_task1/c008.simp):
+int main (int i1, bool flag)
+{
+int a := i1;
+bool b := flag;
+if ((f ( 10 ) == g ( 20 )) & b) then 
+   { h ( 30, a ) }
+else 
+   { j ( 3, 2, a  ) }
+}
+
+int f ( int x ) { 0 }
+
+int g ( int x )  { ( x + x ) }
+
+int g ( int a )  { a }
+
+int h ( int a, int b )  { ( b - a ) }
+
+int j ( int s, int t, int u )
+{
+    if (( s + t ) == ( s + u )) then { 20 } else { 30 }
+} 
+========================================
+Student Output:
+========================================
+Expected Output:
+Duplicated function names
+=========Failed Test for Task 1=========
+Input (../tester/tests_task1/b014.simp):
+unit main(){
+  int i := 0;
+  while (i<294) do { vaq23(i); i := (i+1); skip };
+  nox83(625,478)
+}
+
+unit vaq23(int liy84) {
+    repeat { liy84 := (liy84 - 20) } until (liy84 < 20);
+    if (liy84 < 0) then { liy84 := (liy84 + 20) } else { skip };
+    if (liy84 == 0) then {
+      print newline
+    } else { if (liy84 == 1) then {
+          print 1; print newline
+        } else { if (liy84 == 2) then {
+              print 1; print 1; print newline
+            } else { if (liy84 == 3) then {
+                  print 1; print 1; print 1; print newline
+                } else { if (liy84 == 4) then {
+                      print 1; print 1; print 1; print 1; print newline
+                  } else {
+                      skip   
+                  }
+                }
+            }
+        }
+    }
+}
+
+int nox83(int ceb90, int mik92) {
+  print if (ceb90>=mik92)
+  then {(ceb90-mik92)}
+  else {(ceb90*mik92)};
+  0
+}
+========================================
+Student Output:
+========================================
+Expected Output:
+Wrong return type declared for main function
