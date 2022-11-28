@@ -9,29 +9,29 @@ dec: TYPE IDFR LParen vardec RParen body
 vardec: (TYPE IDFR (Comma TYPE IDFR )* )?
     ;
 
-body: LBrace (TYPE IDFR ':=' exp ';')* ene RBrace
+body: LBrace (TYPE IDFR ':=' exp Semicolon)* ene RBrace
     ;
 
 block: LBrace ene RBrace
     ;
 
-ene: exp (';' exp)*
+ene: exp (Semicolon exp)*
     ;
 
-exp: IDFR
-    | INTLIT
-    | BOOLIT
-    | IDFR ':=' exp
-    | LParen exp BINOP exp RParen
-    | IDFR LParen args RParen
-    | block
-    | 'if' exp 'then' block ('else' block)?
-    | 'while' exp 'do' block
-    | 'repeat' block 'until' exp
-    | 'print' exp
-    | 'space'
-    | 'newline'
-    | 'skip'
+exp: IDFR #IDFREXP
+    | INTLIT #INTEXP
+    | BOOLIT #BOOLEXP
+    | IDFR ':=' exp #ASSIGNEXP
+    | LParen exp BINOP exp RParen #BINOPEXP
+    | IDFR LParen args RParen #FUNCEXP
+    | block #BLOCKEXP
+    | 'if' exp 'then' block ('else' block)? #IFEXP
+    | 'while' exp 'do' block #WHILEEXP
+    | 'repeat' block 'until' exp #REPEATEXP
+    | 'print' exp #PRINTEXP
+    | 'space' #SPACEEXP
+    | 'newline' #NEWLINEXP
+    | 'skip' #SKIPEXP
     ;
 
 args: (exp (Comma exp)*)?
@@ -49,7 +49,7 @@ Minis : '-';
 Mult : '*';
 Divide : '/' ;*/
 
-BINOP: '==' | '<' | '>' | '<=' | '>=' | '+' | '-' | '*' | '/' | '&&' | '||' | '^';
+BINOP: '==' | '<' | '>' | '<=' | '>=' | '&&' | '||' | '^' | '+' | '-' | '*' | '/';
 TYPE: 'int' | 'bool' | 'unit' ;
 IDFR: [_a-zA-Z][_a-zA-Z]*;
 INTLIT: '0' | [1-9][0-9]*;

@@ -15,7 +15,14 @@ public class Task1 {
         CommonTokenStream tokens = new CommonTokenStream(lexer);
         //create a parser of tokens from the token buffer
         simpleLangParser parser = new simpleLangParser(tokens);
-        ParseTree tree = parser.prog(); //begin parsing
+        simpleLangParser.ProgContext tree = parser.prog(); //begin parsing
 
+        simpleLangChecker checker = new simpleLangChecker();
+        try {
+            checker.visit(tree);
+        } catch (TypeException ex) {
+            System.out.println(ex.report());
+            return;
+        }
     }
 }

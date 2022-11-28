@@ -46,11 +46,103 @@ public interface simpleLangVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitEne(simpleLangParser.EneContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link simpleLangParser#exp}.
+	 * Visit a parse tree produced by the {@code IDFREXP}
+	 * labeled alternative in {@link simpleLangParser#exp}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitExp(simpleLangParser.ExpContext ctx);
+	T visitIDFREXP(simpleLangParser.IDFREXPContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code INTEXP}
+	 * labeled alternative in {@link simpleLangParser#exp}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitINTEXP(simpleLangParser.INTEXPContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code BOOLEXP}
+	 * labeled alternative in {@link simpleLangParser#exp}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitBOOLEXP(simpleLangParser.BOOLEXPContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code ASSIGNEXP}
+	 * labeled alternative in {@link simpleLangParser#exp}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitASSIGNEXP(simpleLangParser.ASSIGNEXPContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code BINOPEXP}
+	 * labeled alternative in {@link simpleLangParser#exp}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitBINOPEXP(simpleLangParser.BINOPEXPContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code FUNCEXP}
+	 * labeled alternative in {@link simpleLangParser#exp}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitFUNCEXP(simpleLangParser.FUNCEXPContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code BLOCKEXP}
+	 * labeled alternative in {@link simpleLangParser#exp}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitBLOCKEXP(simpleLangParser.BLOCKEXPContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code IFEXP}
+	 * labeled alternative in {@link simpleLangParser#exp}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitIFEXP(simpleLangParser.IFEXPContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code WHILEEXP}
+	 * labeled alternative in {@link simpleLangParser#exp}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitWHILEEXP(simpleLangParser.WHILEEXPContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code REPEATEXP}
+	 * labeled alternative in {@link simpleLangParser#exp}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitREPEATEXP(simpleLangParser.REPEATEXPContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code PRINTEXP}
+	 * labeled alternative in {@link simpleLangParser#exp}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitPRINTEXP(simpleLangParser.PRINTEXPContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code SPACEEXP}
+	 * labeled alternative in {@link simpleLangParser#exp}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitSPACEEXP(simpleLangParser.SPACEEXPContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code NEWLINEXP}
+	 * labeled alternative in {@link simpleLangParser#exp}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitNEWLINEXP(simpleLangParser.NEWLINEXPContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code SKIPEXP}
+	 * labeled alternative in {@link simpleLangParser#exp}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitSKIPEXP(simpleLangParser.SKIPEXPContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link simpleLangParser#args}.
 	 * @param ctx the parse tree

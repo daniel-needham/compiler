@@ -512,20 +512,41 @@ public class simpleLangParser extends Parser {
 	}
 
 	public static class ExpContext extends ParserRuleContext {
-		public TerminalNode IDFR() { return getToken(simpleLangParser.IDFR, 0); }
-		public TerminalNode INTLIT() { return getToken(simpleLangParser.INTLIT, 0); }
-		public TerminalNode BOOLIT() { return getToken(simpleLangParser.BOOLIT, 0); }
-		public List<ExpContext> exp() {
-			return getRuleContexts(ExpContext.class);
+		public ExpContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
 		}
-		public ExpContext exp(int i) {
-			return getRuleContext(ExpContext.class,i);
+		@Override public int getRuleIndex() { return RULE_exp; }
+	 
+		public ExpContext() { }
+		public void copyFrom(ExpContext ctx) {
+			super.copyFrom(ctx);
 		}
-		public TerminalNode LParen() { return getToken(simpleLangParser.LParen, 0); }
-		public TerminalNode BINOP() { return getToken(simpleLangParser.BINOP, 0); }
-		public TerminalNode RParen() { return getToken(simpleLangParser.RParen, 0); }
-		public ArgsContext args() {
-			return getRuleContext(ArgsContext.class,0);
+	}
+	public static class WHILEEXPContext extends ExpContext {
+		public ExpContext exp() {
+			return getRuleContext(ExpContext.class,0);
+		}
+		public BlockContext block() {
+			return getRuleContext(BlockContext.class,0);
+		}
+		public WHILEEXPContext(ExpContext ctx) { copyFrom(ctx); }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof simpleLangListener ) ((simpleLangListener)listener).enterWHILEEXP(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof simpleLangListener ) ((simpleLangListener)listener).exitWHILEEXP(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof simpleLangVisitor ) return ((simpleLangVisitor<? extends T>)visitor).visitWHILEEXP(this);
+			else return visitor.visitChildren(this);
+		}
+	}
+	public static class IFEXPContext extends ExpContext {
+		public ExpContext exp() {
+			return getRuleContext(ExpContext.class,0);
 		}
 		public List<BlockContext> block() {
 			return getRuleContexts(BlockContext.class);
@@ -533,21 +554,244 @@ public class simpleLangParser extends Parser {
 		public BlockContext block(int i) {
 			return getRuleContext(BlockContext.class,i);
 		}
-		public ExpContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-		}
-		@Override public int getRuleIndex() { return RULE_exp; }
+		public IFEXPContext(ExpContext ctx) { copyFrom(ctx); }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof simpleLangListener ) ((simpleLangListener)listener).enterExp(this);
+			if ( listener instanceof simpleLangListener ) ((simpleLangListener)listener).enterIFEXP(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof simpleLangListener ) ((simpleLangListener)listener).exitExp(this);
+			if ( listener instanceof simpleLangListener ) ((simpleLangListener)listener).exitIFEXP(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof simpleLangVisitor ) return ((simpleLangVisitor<? extends T>)visitor).visitExp(this);
+			if ( visitor instanceof simpleLangVisitor ) return ((simpleLangVisitor<? extends T>)visitor).visitIFEXP(this);
+			else return visitor.visitChildren(this);
+		}
+	}
+	public static class IDFREXPContext extends ExpContext {
+		public TerminalNode IDFR() { return getToken(simpleLangParser.IDFR, 0); }
+		public IDFREXPContext(ExpContext ctx) { copyFrom(ctx); }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof simpleLangListener ) ((simpleLangListener)listener).enterIDFREXP(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof simpleLangListener ) ((simpleLangListener)listener).exitIDFREXP(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof simpleLangVisitor ) return ((simpleLangVisitor<? extends T>)visitor).visitIDFREXP(this);
+			else return visitor.visitChildren(this);
+		}
+	}
+	public static class INTEXPContext extends ExpContext {
+		public TerminalNode INTLIT() { return getToken(simpleLangParser.INTLIT, 0); }
+		public INTEXPContext(ExpContext ctx) { copyFrom(ctx); }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof simpleLangListener ) ((simpleLangListener)listener).enterINTEXP(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof simpleLangListener ) ((simpleLangListener)listener).exitINTEXP(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof simpleLangVisitor ) return ((simpleLangVisitor<? extends T>)visitor).visitINTEXP(this);
+			else return visitor.visitChildren(this);
+		}
+	}
+	public static class REPEATEXPContext extends ExpContext {
+		public BlockContext block() {
+			return getRuleContext(BlockContext.class,0);
+		}
+		public ExpContext exp() {
+			return getRuleContext(ExpContext.class,0);
+		}
+		public REPEATEXPContext(ExpContext ctx) { copyFrom(ctx); }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof simpleLangListener ) ((simpleLangListener)listener).enterREPEATEXP(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof simpleLangListener ) ((simpleLangListener)listener).exitREPEATEXP(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof simpleLangVisitor ) return ((simpleLangVisitor<? extends T>)visitor).visitREPEATEXP(this);
+			else return visitor.visitChildren(this);
+		}
+	}
+	public static class ASSIGNEXPContext extends ExpContext {
+		public TerminalNode IDFR() { return getToken(simpleLangParser.IDFR, 0); }
+		public ExpContext exp() {
+			return getRuleContext(ExpContext.class,0);
+		}
+		public ASSIGNEXPContext(ExpContext ctx) { copyFrom(ctx); }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof simpleLangListener ) ((simpleLangListener)listener).enterASSIGNEXP(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof simpleLangListener ) ((simpleLangListener)listener).exitASSIGNEXP(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof simpleLangVisitor ) return ((simpleLangVisitor<? extends T>)visitor).visitASSIGNEXP(this);
+			else return visitor.visitChildren(this);
+		}
+	}
+	public static class NEWLINEXPContext extends ExpContext {
+		public NEWLINEXPContext(ExpContext ctx) { copyFrom(ctx); }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof simpleLangListener ) ((simpleLangListener)listener).enterNEWLINEXP(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof simpleLangListener ) ((simpleLangListener)listener).exitNEWLINEXP(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof simpleLangVisitor ) return ((simpleLangVisitor<? extends T>)visitor).visitNEWLINEXP(this);
+			else return visitor.visitChildren(this);
+		}
+	}
+	public static class PRINTEXPContext extends ExpContext {
+		public ExpContext exp() {
+			return getRuleContext(ExpContext.class,0);
+		}
+		public PRINTEXPContext(ExpContext ctx) { copyFrom(ctx); }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof simpleLangListener ) ((simpleLangListener)listener).enterPRINTEXP(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof simpleLangListener ) ((simpleLangListener)listener).exitPRINTEXP(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof simpleLangVisitor ) return ((simpleLangVisitor<? extends T>)visitor).visitPRINTEXP(this);
+			else return visitor.visitChildren(this);
+		}
+	}
+	public static class FUNCEXPContext extends ExpContext {
+		public TerminalNode IDFR() { return getToken(simpleLangParser.IDFR, 0); }
+		public TerminalNode LParen() { return getToken(simpleLangParser.LParen, 0); }
+		public ArgsContext args() {
+			return getRuleContext(ArgsContext.class,0);
+		}
+		public TerminalNode RParen() { return getToken(simpleLangParser.RParen, 0); }
+		public FUNCEXPContext(ExpContext ctx) { copyFrom(ctx); }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof simpleLangListener ) ((simpleLangListener)listener).enterFUNCEXP(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof simpleLangListener ) ((simpleLangListener)listener).exitFUNCEXP(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof simpleLangVisitor ) return ((simpleLangVisitor<? extends T>)visitor).visitFUNCEXP(this);
+			else return visitor.visitChildren(this);
+		}
+	}
+	public static class SKIPEXPContext extends ExpContext {
+		public SKIPEXPContext(ExpContext ctx) { copyFrom(ctx); }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof simpleLangListener ) ((simpleLangListener)listener).enterSKIPEXP(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof simpleLangListener ) ((simpleLangListener)listener).exitSKIPEXP(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof simpleLangVisitor ) return ((simpleLangVisitor<? extends T>)visitor).visitSKIPEXP(this);
+			else return visitor.visitChildren(this);
+		}
+	}
+	public static class BOOLEXPContext extends ExpContext {
+		public TerminalNode BOOLIT() { return getToken(simpleLangParser.BOOLIT, 0); }
+		public BOOLEXPContext(ExpContext ctx) { copyFrom(ctx); }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof simpleLangListener ) ((simpleLangListener)listener).enterBOOLEXP(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof simpleLangListener ) ((simpleLangListener)listener).exitBOOLEXP(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof simpleLangVisitor ) return ((simpleLangVisitor<? extends T>)visitor).visitBOOLEXP(this);
+			else return visitor.visitChildren(this);
+		}
+	}
+	public static class BINOPEXPContext extends ExpContext {
+		public TerminalNode LParen() { return getToken(simpleLangParser.LParen, 0); }
+		public List<ExpContext> exp() {
+			return getRuleContexts(ExpContext.class);
+		}
+		public ExpContext exp(int i) {
+			return getRuleContext(ExpContext.class,i);
+		}
+		public TerminalNode BINOP() { return getToken(simpleLangParser.BINOP, 0); }
+		public TerminalNode RParen() { return getToken(simpleLangParser.RParen, 0); }
+		public BINOPEXPContext(ExpContext ctx) { copyFrom(ctx); }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof simpleLangListener ) ((simpleLangListener)listener).enterBINOPEXP(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof simpleLangListener ) ((simpleLangListener)listener).exitBINOPEXP(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof simpleLangVisitor ) return ((simpleLangVisitor<? extends T>)visitor).visitBINOPEXP(this);
+			else return visitor.visitChildren(this);
+		}
+	}
+	public static class SPACEEXPContext extends ExpContext {
+		public SPACEEXPContext(ExpContext ctx) { copyFrom(ctx); }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof simpleLangListener ) ((simpleLangListener)listener).enterSPACEEXP(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof simpleLangListener ) ((simpleLangListener)listener).exitSPACEEXP(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof simpleLangVisitor ) return ((simpleLangVisitor<? extends T>)visitor).visitSPACEEXP(this);
+			else return visitor.visitChildren(this);
+		}
+	}
+	public static class BLOCKEXPContext extends ExpContext {
+		public BlockContext block() {
+			return getRuleContext(BlockContext.class,0);
+		}
+		public BLOCKEXPContext(ExpContext ctx) { copyFrom(ctx); }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof simpleLangListener ) ((simpleLangListener)listener).enterBLOCKEXP(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof simpleLangListener ) ((simpleLangListener)listener).exitBLOCKEXP(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof simpleLangVisitor ) return ((simpleLangVisitor<? extends T>)visitor).visitBLOCKEXP(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -561,6 +805,7 @@ public class simpleLangParser extends Parser {
 			_errHandler.sync(this);
 			switch ( getInterpreter().adaptivePredict(_input,6,_ctx) ) {
 			case 1:
+				_localctx = new IDFREXPContext(_localctx);
 				enterOuterAlt(_localctx, 1);
 				{
 				setState(69);
@@ -568,6 +813,7 @@ public class simpleLangParser extends Parser {
 				}
 				break;
 			case 2:
+				_localctx = new INTEXPContext(_localctx);
 				enterOuterAlt(_localctx, 2);
 				{
 				setState(70);
@@ -575,6 +821,7 @@ public class simpleLangParser extends Parser {
 				}
 				break;
 			case 3:
+				_localctx = new BOOLEXPContext(_localctx);
 				enterOuterAlt(_localctx, 3);
 				{
 				setState(71);
@@ -582,6 +829,7 @@ public class simpleLangParser extends Parser {
 				}
 				break;
 			case 4:
+				_localctx = new ASSIGNEXPContext(_localctx);
 				enterOuterAlt(_localctx, 4);
 				{
 				setState(72);
@@ -593,6 +841,7 @@ public class simpleLangParser extends Parser {
 				}
 				break;
 			case 5:
+				_localctx = new BINOPEXPContext(_localctx);
 				enterOuterAlt(_localctx, 5);
 				{
 				setState(75);
@@ -608,6 +857,7 @@ public class simpleLangParser extends Parser {
 				}
 				break;
 			case 6:
+				_localctx = new FUNCEXPContext(_localctx);
 				enterOuterAlt(_localctx, 6);
 				{
 				setState(81);
@@ -621,6 +871,7 @@ public class simpleLangParser extends Parser {
 				}
 				break;
 			case 7:
+				_localctx = new BLOCKEXPContext(_localctx);
 				enterOuterAlt(_localctx, 7);
 				{
 				setState(86);
@@ -628,6 +879,7 @@ public class simpleLangParser extends Parser {
 				}
 				break;
 			case 8:
+				_localctx = new IFEXPContext(_localctx);
 				enterOuterAlt(_localctx, 8);
 				{
 				setState(87);
@@ -653,6 +905,7 @@ public class simpleLangParser extends Parser {
 				}
 				break;
 			case 9:
+				_localctx = new WHILEEXPContext(_localctx);
 				enterOuterAlt(_localctx, 9);
 				{
 				setState(95);
@@ -666,6 +919,7 @@ public class simpleLangParser extends Parser {
 				}
 				break;
 			case 10:
+				_localctx = new REPEATEXPContext(_localctx);
 				enterOuterAlt(_localctx, 10);
 				{
 				setState(100);
@@ -679,6 +933,7 @@ public class simpleLangParser extends Parser {
 				}
 				break;
 			case 11:
+				_localctx = new PRINTEXPContext(_localctx);
 				enterOuterAlt(_localctx, 11);
 				{
 				setState(105);
@@ -688,6 +943,7 @@ public class simpleLangParser extends Parser {
 				}
 				break;
 			case 12:
+				_localctx = new SPACEEXPContext(_localctx);
 				enterOuterAlt(_localctx, 12);
 				{
 				setState(107);
@@ -695,6 +951,7 @@ public class simpleLangParser extends Parser {
 				}
 				break;
 			case 13:
+				_localctx = new NEWLINEXPContext(_localctx);
 				enterOuterAlt(_localctx, 13);
 				{
 				setState(108);
@@ -702,6 +959,7 @@ public class simpleLangParser extends Parser {
 				}
 				break;
 			case 14:
+				_localctx = new SKIPEXPContext(_localctx);
 				enterOuterAlt(_localctx, 14);
 				{
 				setState(109);
