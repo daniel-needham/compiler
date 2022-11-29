@@ -5,7 +5,7 @@ int main() { fun3(1, 2, 3) }
 unit fun2() { skip }
 ========================================
 Student Output:
-Duplicated function names
+Unknown variable name
 ========================================
 Expected Output:
 Unknown function name
@@ -83,6 +83,52 @@ Student Output:
 Expected Output:
 No main function defined
 =========Failed Test for Task 1=========
+Input (../tester/tests_task1/c014.simp):
+int main(){
+  int i := 0;
+  while (i<294) do { vaq23(i); i := (i+1); skip };
+  nox83(625,478)
+}
+
+unit vaq23(int liy84) {
+    repeat { liy84 := (liy84 - 20) } until (liy84 < 20);
+    if (liy84 < 0) then { liy84 := (liy84 + 20) } else { skip };
+    if (liy84 == 0) then {
+      print newline
+    } else { if (liy84 == 1) then {
+          print 1; print newline
+        } else { if (liy84 == 2) then {
+              print 1; print 1; print newline
+            } else { if (liy84 == 3) then {
+                  print 1; print 1; print 1; print newline
+                } else { if (liy84 == 4) then {
+                      print 1; print 1; print 1; print 1; print newline
+                  } else {
+                      skip   
+                  }
+                }
+            }
+        }
+    }
+}
+
+int vaq23(int a) {
+    0
+}
+
+int nox83(int ceb90, int mik92) {
+  print if (ceb90>=mik92)
+  then {(ceb90-mik92)}
+  else {(ceb90*mik92)};
+  0
+}
+========================================
+Student Output:
+Incompatible types in assignment
+========================================
+Expected Output:
+Duplicated function names
+=========Failed Test for Task 1=========
 Input (../tester/tests_task1/c008.simp):
 int main (int i1, bool flag)
 {
@@ -149,6 +195,7 @@ int nox83(int ceb90, int mik92) {
 }
 ========================================
 Student Output:
+Incompatible types in assignment
 ========================================
 Expected Output:
 Wrong return type declared for main function

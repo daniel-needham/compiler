@@ -18,7 +18,7 @@ public class simpleLangParser extends Parser {
 	public static final int
 		T__0=1, T__1=2, T__2=3, T__3=4, T__4=5, T__5=6, T__6=7, T__7=8, T__8=9, 
 		T__9=10, T__10=11, T__11=12, LParen=13, Comma=14, RParen=15, LBrace=16, 
-		Semicolon=17, RBrace=18, BINOP=19, TYPE=20, IDFR=21, INTLIT=22, BOOLIT=23, 
+		Semicolon=17, RBrace=18, BINOP=19, TYPE=20, INTLIT=21, BOOLIT=22, IDFR=23, 
 		WS=24;
 	public static final int
 		RULE_prog = 0, RULE_dec = 1, RULE_vardec = 2, RULE_body = 3, RULE_block = 4, 
@@ -42,7 +42,7 @@ public class simpleLangParser extends Parser {
 		return new String[] {
 			null, null, null, null, null, null, null, null, null, null, null, null, 
 			null, "LParen", "Comma", "RParen", "LBrace", "Semicolon", "RBrace", "BINOP", 
-			"TYPE", "IDFR", "INTLIT", "BOOLIT", "WS"
+			"TYPE", "INTLIT", "BOOLIT", "IDFR", "WS"
 		};
 	}
 	private static final String[] _SYMBOLIC_NAMES = makeSymbolicNames();
@@ -1019,7 +1019,7 @@ public class simpleLangParser extends Parser {
 			setState(120);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
-			if ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << T__1) | (1L << T__4) | (1L << T__6) | (1L << T__8) | (1L << T__9) | (1L << T__10) | (1L << T__11) | (1L << LParen) | (1L << LBrace) | (1L << IDFR) | (1L << INTLIT) | (1L << BOOLIT))) != 0)) {
+			if ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << T__1) | (1L << T__4) | (1L << T__6) | (1L << T__8) | (1L << T__9) | (1L << T__10) | (1L << T__11) | (1L << LParen) | (1L << LBrace) | (1L << INTLIT) | (1L << BOOLIT) | (1L << IDFR))) != 0)) {
 				{
 				setState(112);
 				exp();
@@ -1085,16 +1085,16 @@ public class simpleLangParser extends Parser {
 		"\u0011\u0001\u0000\u0000\u0000\u0013\u0014\u0001\u0000\u0000\u0000\u0014"+
 		"\u0015\u0001\u0000\u0000\u0000\u0015\u0016\u0005\u0000\u0000\u0001\u0016"+
 		"\u0001\u0001\u0000\u0000\u0000\u0017\u0018\u0005\u0014\u0000\u0000\u0018"+
-		"\u0019\u0005\u0015\u0000\u0000\u0019\u001a\u0005\r\u0000\u0000\u001a\u001b"+
+		"\u0019\u0005\u0017\u0000\u0000\u0019\u001a\u0005\r\u0000\u0000\u001a\u001b"+
 		"\u0003\u0004\u0002\u0000\u001b\u001c\u0005\u000f\u0000\u0000\u001c\u001d"+
 		"\u0003\u0006\u0003\u0000\u001d\u0003\u0001\u0000\u0000\u0000\u001e\u001f"+
-		"\u0005\u0014\u0000\u0000\u001f%\u0005\u0015\u0000\u0000 !\u0005\u000e"+
-		"\u0000\u0000!\"\u0005\u0014\u0000\u0000\"$\u0005\u0015\u0000\u0000# \u0001"+
+		"\u0005\u0014\u0000\u0000\u001f%\u0005\u0017\u0000\u0000 !\u0005\u000e"+
+		"\u0000\u0000!\"\u0005\u0014\u0000\u0000\"$\u0005\u0017\u0000\u0000# \u0001"+
 		"\u0000\u0000\u0000$\'\u0001\u0000\u0000\u0000%#\u0001\u0000\u0000\u0000"+
 		"%&\u0001\u0000\u0000\u0000&)\u0001\u0000\u0000\u0000\'%\u0001\u0000\u0000"+
 		"\u0000(\u001e\u0001\u0000\u0000\u0000()\u0001\u0000\u0000\u0000)\u0005"+
 		"\u0001\u0000\u0000\u0000*3\u0005\u0010\u0000\u0000+,\u0005\u0014\u0000"+
-		"\u0000,-\u0005\u0015\u0000\u0000-.\u0005\u0001\u0000\u0000./\u0003\f\u0006"+
+		"\u0000,-\u0005\u0017\u0000\u0000-.\u0005\u0001\u0000\u0000./\u0003\f\u0006"+
 		"\u0000/0\u0005\u0011\u0000\u000002\u0001\u0000\u0000\u00001+\u0001\u0000"+
 		"\u0000\u000025\u0001\u0000\u0000\u000031\u0001\u0000\u0000\u000034\u0001"+
 		"\u0000\u0000\u000046\u0001\u0000\u0000\u000053\u0001\u0000\u0000\u0000"+
@@ -1103,12 +1103,12 @@ public class simpleLangParser extends Parser {
 		"\u0000<\t\u0001\u0000\u0000\u0000=B\u0003\f\u0006\u0000>?\u0005\u0011"+
 		"\u0000\u0000?A\u0003\f\u0006\u0000@>\u0001\u0000\u0000\u0000AD\u0001\u0000"+
 		"\u0000\u0000B@\u0001\u0000\u0000\u0000BC\u0001\u0000\u0000\u0000C\u000b"+
-		"\u0001\u0000\u0000\u0000DB\u0001\u0000\u0000\u0000Eo\u0005\u0015\u0000"+
-		"\u0000Fo\u0005\u0016\u0000\u0000Go\u0005\u0017\u0000\u0000HI\u0005\u0015"+
+		"\u0001\u0000\u0000\u0000DB\u0001\u0000\u0000\u0000Eo\u0005\u0017\u0000"+
+		"\u0000Fo\u0005\u0015\u0000\u0000Go\u0005\u0016\u0000\u0000HI\u0005\u0017"+
 		"\u0000\u0000IJ\u0005\u0001\u0000\u0000Jo\u0003\f\u0006\u0000KL\u0005\r"+
 		"\u0000\u0000LM\u0003\f\u0006\u0000MN\u0005\u0013\u0000\u0000NO\u0003\f"+
 		"\u0006\u0000OP\u0005\u000f\u0000\u0000Po\u0001\u0000\u0000\u0000QR\u0005"+
-		"\u0015\u0000\u0000RS\u0005\r\u0000\u0000ST\u0003\u000e\u0007\u0000TU\u0005"+
+		"\u0017\u0000\u0000RS\u0005\r\u0000\u0000ST\u0003\u000e\u0007\u0000TU\u0005"+
 		"\u000f\u0000\u0000Uo\u0001\u0000\u0000\u0000Vo\u0003\b\u0004\u0000WX\u0005"+
 		"\u0002\u0000\u0000XY\u0003\f\u0006\u0000YZ\u0005\u0003\u0000\u0000Z]\u0003"+
 		"\b\u0004\u0000[\\\u0005\u0004\u0000\u0000\\^\u0003\b\u0004\u0000][\u0001"+

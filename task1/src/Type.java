@@ -1,3 +1,5 @@
+import java.util.function.Predicate;
+
 public enum Type {
     INT("int"), BOOL("bool"), UNIT("unit");
 
