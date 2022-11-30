@@ -34,33 +34,47 @@ public class simpleLangChecker extends AbstractParseTreeVisitor<Type> implements
     public Type visitProg(simpleLangParser.ProgContext ctx) {
         boolean mainMethod = false;
         boolean mainMethodIntReturn = false;
+        //debug
+        ctx.dec().forEach(x -> System.out.println(x.IDFR().getText()));
         for (simpleLangParser.DecContext dec : ctx.dec()) {
-            visit(dec);
             if (dec.IDFR().getText().equals("main")) {
                 mainMethod = true;
-                if (dec.TYPE().getText().equals(Type.INT.getText())) {
-                    mainMethodIntReturn = true;
+                if (Type.returnType(dec.TYPE().getText()) != Type.INT) {
+                    throw new TypeException().mainReturnTypeError();
                 }
             }
+            //from here
+            if (symbolTable.containsKey(dec.IDFR().getText())) {
+                throw new TypeException().duplicatedFuncError();
+            } else {
+                Map<String, Type> localVariableMap = new LinkedHashMap<>();
+                localVariableMap.put(dec.IDFR().getText(), Type.returnType(dec.TYPE().getText()));
+                symbolTable.put(dec.IDFR().getText(), localVariableMap);
+            }
+            //here
+            visit(dec.vardec());
+        }
+        //debug
+        ctx.dec().forEach(x -> System.out.println(x.IDFR().getText()));
+
+        for (simpleLangParser.DecContext dec : ctx.dec()) {
+            System.out.println(dec.IDFR().getText());
+            visit(dec);
         }
         if (!mainMethod) throw new TypeException().noMainFuncError();
-        if (!mainMethodIntReturn && mainMethod) throw new TypeException().mainReturnTypeError();
         return Type.INT;
     }
 
+
+    //ITERATE THROUGH VARDEC FIRST - THEN LOOP THROUGHT VI
     @Override
     public Type visitDec(simpleLangParser.DecContext ctx) {
         Type decType = Type.returnType(ctx.TYPE().getText());
-        if (symbolTable.containsKey(ctx.IDFR().getText())) {
-            throw new TypeException().duplicatedFuncError();
-        } else {
-            Map<String, Type> localVariableMap = new LinkedHashMap<>();
-            localVariableMap.put(ctx.IDFR().getText(), decType);
-            symbolTable.put(ctx.IDFR().getText(), localVariableMap);
-        }
 
-        visit(ctx.vardec());
+        //taken from here
+
         if (visit(ctx.body()) != decType) {
+            System.out.println(visit(ctx.body()));
             throw new TypeException().functionBodyError();
         }
         return decType;
@@ -219,7 +233,7 @@ public class simpleLangChecker extends AbstractParseTreeVisitor<Type> implements
         if (!typeMatch) {
             throw new TypeException().branchMismatchError();
         }
-        return Type.UNIT;
+        return visit(ctx.block(0));
     }
 
     @Override
@@ -230,7 +244,7 @@ public class simpleLangChecker extends AbstractParseTreeVisitor<Type> implements
         if (visit(ctx.block()) != Type.UNIT) {
             throw new TypeException().loopBodyError();
         }
-        return Type.UNIT;
+        return visit(ctx.block());
     }
 
     @Override
@@ -241,7 +255,7 @@ public class simpleLangChecker extends AbstractParseTreeVisitor<Type> implements
         if (visit(ctx.block()) != Type.UNIT) {
             throw new TypeException().loopBodyError();
         }
-        return Type.UNIT;
+        return visit(ctx.block());
     }
 
     @Override

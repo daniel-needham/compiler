@@ -5,7 +5,7 @@ int main() { fun3(1, 2, 3) }
 unit fun2() { skip }
 ========================================
 Student Output:
-Unknown variable name
+Invalid return value type
 ========================================
 Expected Output:
 Unknown function name
@@ -27,6 +27,7 @@ int collatzA(int qoz29, int depth) {
 }
 ========================================
 Student Output:
+Unknown function name
 ========================================
 Expected Output:
 A variable name clashed with a function name
@@ -37,7 +38,7 @@ int main1() { fun(1, 2, 3) }
 unit fun2() { skip }
 ========================================
 Student Output:
-Duplicated function names
+Invalid return value type
 ========================================
 Expected Output:
 No main function defined
@@ -59,6 +60,7 @@ int collatzA(int qoz29, int depth) {
 }
 ========================================
 Student Output:
+Unknown function name
 ========================================
 Expected Output:
 Variable of unit type
@@ -79,9 +81,21 @@ int collatzA(int qoz29, int depth) {
 }
 ========================================
 Student Output:
+Unknown function name
 ========================================
 Expected Output:
 No main function defined
+=========Failed Test for Task 1=========
+Input (../tester/tests_task1/c001.simp):
+int fun(int x,int y,int z) { if (x == y) then { z } else { 0 } }
+int main() { fun(1, 2, 3) }
+unit fun() { skip }
+========================================
+Student Output:
+Invalid return value type
+========================================
+Expected Output:
+Duplicated function names
 =========Failed Test for Task 1=========
 Input (../tester/tests_task1/c014.simp):
 int main(){
@@ -124,7 +138,7 @@ int nox83(int ceb90, int mik92) {
 }
 ========================================
 Student Output:
-Incompatible types in assignment
+Unknown variable name
 ========================================
 Expected Output:
 Duplicated function names
@@ -195,7 +209,7 @@ int nox83(int ceb90, int mik92) {
 }
 ========================================
 Student Output:
-Incompatible types in assignment
+Unknown variable name
 ========================================
 Expected Output:
 Wrong return type declared for main function

@@ -24,5 +24,11 @@ public class Task1 {
             System.out.println(ex.report());
             return;
         }
+
+     /*   simpleLangInterpreter interpreter = new simpleLangInterpreter();
+        Integer mainReturnValue = interpreter.visitProg(tree, args);
+        System.out.println();
+        System.out.println("NORMAL_TERMINATION");
+        System.out.println(mainReturnValue);*/
     }
 }
