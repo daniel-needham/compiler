@@ -35,7 +35,6 @@ public class simpleLangChecker extends AbstractParseTreeVisitor<Type> implements
         boolean mainMethod = false;
         boolean mainMethodIntReturn = false;
         //debug
-        ctx.dec().forEach(x -> System.out.println(x.IDFR().getText()));
         for (simpleLangParser.DecContext dec : ctx.dec()) {
             if (dec.IDFR().getText().equals("main")) {
                 mainMethod = true;
@@ -55,10 +54,7 @@ public class simpleLangChecker extends AbstractParseTreeVisitor<Type> implements
             visit(dec.vardec());
         }
         //debug
-        ctx.dec().forEach(x -> System.out.println(x.IDFR().getText()));
-
         for (simpleLangParser.DecContext dec : ctx.dec()) {
-            System.out.println(dec.IDFR().getText());
             visit(dec);
         }
         if (!mainMethod) throw new TypeException().noMainFuncError();
@@ -99,6 +95,8 @@ public class simpleLangChecker extends AbstractParseTreeVisitor<Type> implements
             Type instanceVarType = Type.returnType(ctx.TYPE(i).getText());
             String idfr = ctx.IDFR(i).getText();
             Type variableTableType = localVariableTable.get(idfr);
+            //name of function defined - throw ex
+            if (symbolTable.containsKey(idfr)) throw new TypeException().clashedVarError();
             //add to symbol table if not already initialised
             if (variableTableType == null) {
                 localVariableTable.put(idfr, instanceVarType);
