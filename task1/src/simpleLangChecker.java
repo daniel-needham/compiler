@@ -143,6 +143,8 @@ public class simpleLangChecker extends AbstractParseTreeVisitor<Type> implements
         return Type.BOOL;
     }
 
+
+    //TODO i dont think any new variable can be declared here - only the reassignment of a variable fix
     @Override
     public Type visitASSIGNEXP(simpleLangParser.ASSIGNEXPContext ctx) {
         String parentFuncName = this.getDecParentAsString(ctx);
@@ -198,6 +200,8 @@ public class simpleLangChecker extends AbstractParseTreeVisitor<Type> implements
 
     }
 
+
+    //TODO change argumentNumberError exception - includes body variables in calculation
     @Override
     public Type visitFUNCEXP(simpleLangParser.FUNCEXPContext ctx) {
 
