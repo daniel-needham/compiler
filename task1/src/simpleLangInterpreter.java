@@ -1,9 +1,7 @@
 import org.antlr.v4.runtime.tree.AbstractParseTreeVisitor;
+import org.antlr.v4.runtime.tree.TerminalNode;
 
-import java.util.ArrayDeque;
-import java.util.Deque;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 public class simpleLangInterpreter extends AbstractParseTreeVisitor<Object> implements simpleLangVisitor<Object> {
 
@@ -17,7 +15,6 @@ public class simpleLangInterpreter extends AbstractParseTreeVisitor<Object> impl
 
             if (dec.IDFR().getText().equals("main")){
                 main = dec;
-                System.out.println("triggers");
             } else {
                 functionTable.put(dec.IDFR().getText(), dec);
             }
@@ -69,7 +66,8 @@ public class simpleLangInterpreter extends AbstractParseTreeVisitor<Object> impl
 
     @Override
     public Object visitIDFREXP(simpleLangParser.IDFREXPContext ctx) {
-        return null;
+        Frame invokedFuncMemory = stack.peek();
+        return invokedFuncMemory.getVariable(ctx.IDFR().getText());
     }
 
     @Override
@@ -94,7 +92,14 @@ public class simpleLangInterpreter extends AbstractParseTreeVisitor<Object> impl
 
     @Override
     public Object visitFUNCEXP(simpleLangParser.FUNCEXPContext ctx) {
-        return null;
+        simpleLangParser.DecContext function = functionTable.get(ctx.IDFR().getText());
+        List<TerminalNode> variableNames = function.vardec().IDFR();
+        Frame stackFrame =  new Frame(ctx.IDFR().getText(), stack.peek());
+        for (int j = 0; j < ctx.args().exp().size(); j++) {
+            stackFrame.addVariable(variableNames.get(j).getText(), visit(ctx.args().exp(j)));
+        }
+        stack.push(stackFrame);
+        return visit(function.body());
     }
 
     @Override
