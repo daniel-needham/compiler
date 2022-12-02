@@ -65,6 +65,6 @@ BINOP: '=='
 
 TYPE: 'int' | 'bool' | 'unit' ;
 INTLIT: '0' | [1-9][0-9]*;
-BOOLIT: 'TRUE' | 'FALSE';
+BOOLIT: 'true' | 'false';
 IDFR: [_a-zA-Z][_a-zA-Z0-9]*;
 WS : [ \n\r\t]+ -> skip ;

@@ -27,4 +27,8 @@ public class Frame {
     public Object getVariable(String name) {
         return localVariable.get(name);
     }
+
+    public void reassignVariable(String name, Object value) {
+        localVariable.replace(name,value);
+    }
 }
