@@ -1,4 +1,4 @@
-// Generated from /home/dan/Uni Work/Compilers/assignment/246619/task1/src/simpleLang.g4 by ANTLR 4.10.1
+// Generated from java-escape by ANTLR 4.11.1
 import org.antlr.v4.runtime.atn.*;
 import org.antlr.v4.runtime.dfa.DFA;
 import org.antlr.v4.runtime.*;
@@ -8,9 +8,9 @@ import java.util.List;
 import java.util.Iterator;
 import java.util.ArrayList;
 
-@SuppressWarnings({"all", "warnings", "unchecked", "unused", "cast"})
+@SuppressWarnings({"all", "warnings", "unchecked", "unused", "cast", "CheckReturnValue"})
 public class simpleLangParser extends Parser {
-	static { RuntimeMetaData.checkVersion("4.10.1", RuntimeMetaData.VERSION); }
+	static { RuntimeMetaData.checkVersion("4.11.1", RuntimeMetaData.VERSION); }
 
 	protected static final DFA[] _decisionToDFA;
 	protected static final PredictionContextCache _sharedContextCache =
@@ -80,7 +80,7 @@ public class simpleLangParser extends Parser {
 	}
 
 	@Override
-	public String getGrammarFileName() { return "simpleLang.g4"; }
+	public String getGrammarFileName() { return "java-escape"; }
 
 	@Override
 	public String[] getRuleNames() { return ruleNames; }
@@ -96,6 +96,7 @@ public class simpleLangParser extends Parser {
 		_interp = new ParserATNSimulator(this,_ATN,_decisionToDFA,_sharedContextCache);
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class ProgContext extends ParserRuleContext {
 		public TerminalNode EOF() { return getToken(simpleLangParser.EOF, 0); }
 		public List<DecContext> dec() {
@@ -159,6 +160,7 @@ public class simpleLangParser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class DecContext extends ParserRuleContext {
 		public TerminalNode TYPE() { return getToken(simpleLangParser.TYPE, 0); }
 		public TerminalNode IDFR() { return getToken(simpleLangParser.IDFR, 0); }
@@ -220,6 +222,7 @@ public class simpleLangParser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class VardecContext extends ParserRuleContext {
 		public List<TerminalNode> TYPE() { return getTokens(simpleLangParser.TYPE); }
 		public TerminalNode TYPE(int i) {
@@ -302,6 +305,7 @@ public class simpleLangParser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class BodyContext extends ParserRuleContext {
 		public TerminalNode LBrace() { return getToken(simpleLangParser.LBrace, 0); }
 		public EneContext ene() {
@@ -393,6 +397,7 @@ public class simpleLangParser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class BlockContext extends ParserRuleContext {
 		public TerminalNode LBrace() { return getToken(simpleLangParser.LBrace, 0); }
 		public EneContext ene() {
@@ -443,6 +448,7 @@ public class simpleLangParser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class EneContext extends ParserRuleContext {
 		public List<ExpContext> exp() {
 			return getRuleContexts(ExpContext.class);
@@ -511,6 +517,7 @@ public class simpleLangParser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class ExpContext extends ParserRuleContext {
 		public ExpContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
@@ -522,6 +529,7 @@ public class simpleLangParser extends Parser {
 			super.copyFrom(ctx);
 		}
 	}
+	@SuppressWarnings("CheckReturnValue")
 	public static class WHILEEXPContext extends ExpContext {
 		public ExpContext exp() {
 			return getRuleContext(ExpContext.class,0);
@@ -544,6 +552,7 @@ public class simpleLangParser extends Parser {
 			else return visitor.visitChildren(this);
 		}
 	}
+	@SuppressWarnings("CheckReturnValue")
 	public static class IFEXPContext extends ExpContext {
 		public ExpContext exp() {
 			return getRuleContext(ExpContext.class,0);
@@ -569,6 +578,7 @@ public class simpleLangParser extends Parser {
 			else return visitor.visitChildren(this);
 		}
 	}
+	@SuppressWarnings("CheckReturnValue")
 	public static class IDFREXPContext extends ExpContext {
 		public TerminalNode IDFR() { return getToken(simpleLangParser.IDFR, 0); }
 		public IDFREXPContext(ExpContext ctx) { copyFrom(ctx); }
@@ -586,6 +596,7 @@ public class simpleLangParser extends Parser {
 			else return visitor.visitChildren(this);
 		}
 	}
+	@SuppressWarnings("CheckReturnValue")
 	public static class INTEXPContext extends ExpContext {
 		public TerminalNode INTLIT() { return getToken(simpleLangParser.INTLIT, 0); }
 		public INTEXPContext(ExpContext ctx) { copyFrom(ctx); }
@@ -603,6 +614,7 @@ public class simpleLangParser extends Parser {
 			else return visitor.visitChildren(this);
 		}
 	}
+	@SuppressWarnings("CheckReturnValue")
 	public static class REPEATEXPContext extends ExpContext {
 		public BlockContext block() {
 			return getRuleContext(BlockContext.class,0);
@@ -625,6 +637,7 @@ public class simpleLangParser extends Parser {
 			else return visitor.visitChildren(this);
 		}
 	}
+	@SuppressWarnings("CheckReturnValue")
 	public static class ASSIGNEXPContext extends ExpContext {
 		public TerminalNode IDFR() { return getToken(simpleLangParser.IDFR, 0); }
 		public ExpContext exp() {
@@ -645,6 +658,7 @@ public class simpleLangParser extends Parser {
 			else return visitor.visitChildren(this);
 		}
 	}
+	@SuppressWarnings("CheckReturnValue")
 	public static class NEWLINEXPContext extends ExpContext {
 		public NEWLINEXPContext(ExpContext ctx) { copyFrom(ctx); }
 		@Override
@@ -661,6 +675,7 @@ public class simpleLangParser extends Parser {
 			else return visitor.visitChildren(this);
 		}
 	}
+	@SuppressWarnings("CheckReturnValue")
 	public static class PRINTEXPContext extends ExpContext {
 		public ExpContext exp() {
 			return getRuleContext(ExpContext.class,0);
@@ -680,6 +695,7 @@ public class simpleLangParser extends Parser {
 			else return visitor.visitChildren(this);
 		}
 	}
+	@SuppressWarnings("CheckReturnValue")
 	public static class FUNCEXPContext extends ExpContext {
 		public TerminalNode IDFR() { return getToken(simpleLangParser.IDFR, 0); }
 		public TerminalNode LParen() { return getToken(simpleLangParser.LParen, 0); }
@@ -702,6 +718,7 @@ public class simpleLangParser extends Parser {
 			else return visitor.visitChildren(this);
 		}
 	}
+	@SuppressWarnings("CheckReturnValue")
 	public static class SKIPEXPContext extends ExpContext {
 		public SKIPEXPContext(ExpContext ctx) { copyFrom(ctx); }
 		@Override
@@ -718,6 +735,7 @@ public class simpleLangParser extends Parser {
 			else return visitor.visitChildren(this);
 		}
 	}
+	@SuppressWarnings("CheckReturnValue")
 	public static class BOOLEXPContext extends ExpContext {
 		public TerminalNode BOOLIT() { return getToken(simpleLangParser.BOOLIT, 0); }
 		public BOOLEXPContext(ExpContext ctx) { copyFrom(ctx); }
@@ -735,6 +753,7 @@ public class simpleLangParser extends Parser {
 			else return visitor.visitChildren(this);
 		}
 	}
+	@SuppressWarnings("CheckReturnValue")
 	public static class BINOPEXPContext extends ExpContext {
 		public TerminalNode LParen() { return getToken(simpleLangParser.LParen, 0); }
 		public List<ExpContext> exp() {
@@ -760,6 +779,7 @@ public class simpleLangParser extends Parser {
 			else return visitor.visitChildren(this);
 		}
 	}
+	@SuppressWarnings("CheckReturnValue")
 	public static class SPACEEXPContext extends ExpContext {
 		public SPACEEXPContext(ExpContext ctx) { copyFrom(ctx); }
 		@Override
@@ -776,6 +796,7 @@ public class simpleLangParser extends Parser {
 			else return visitor.visitChildren(this);
 		}
 	}
+	@SuppressWarnings("CheckReturnValue")
 	public static class BLOCKEXPContext extends ExpContext {
 		public BlockContext block() {
 			return getRuleContext(BlockContext.class,0);
@@ -979,6 +1000,7 @@ public class simpleLangParser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class ArgsContext extends ParserRuleContext {
 		public List<ExpContext> exp() {
 			return getRuleContexts(ExpContext.class);
@@ -1019,7 +1041,7 @@ public class simpleLangParser extends Parser {
 			setState(120);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
-			if ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << T__1) | (1L << T__4) | (1L << T__6) | (1L << T__8) | (1L << T__9) | (1L << T__10) | (1L << T__11) | (1L << LParen) | (1L << LBrace) | (1L << INTLIT) | (1L << BOOLIT) | (1L << IDFR))) != 0)) {
+			if (((_la) & ~0x3f) == 0 && ((1L << _la) & 14761636L) != 0) {
 				{
 				setState(112);
 				exp();

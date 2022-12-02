@@ -70,7 +70,6 @@ public class simpleLangChecker extends AbstractParseTreeVisitor<Type> implements
         //taken from here
 
         if (visit(ctx.body()) != decType) {
-            System.out.println(visit(ctx.body()));
             throw new TypeException().functionBodyError();
         }
         return decType;
@@ -201,7 +200,7 @@ public class simpleLangChecker extends AbstractParseTreeVisitor<Type> implements
     }
 
 
-    //TODO change argumentNumberError exception - includes body variables in calculation
+    //TODO change argumentNumberError exception - refactor as a hashmap of classes (that have variable hashmap)
     @Override
     public Type visitFUNCEXP(simpleLangParser.FUNCEXPContext ctx) {
 
