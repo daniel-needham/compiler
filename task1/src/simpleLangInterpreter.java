@@ -8,7 +8,7 @@ public class simpleLangInterpreter extends AbstractParseTreeVisitor<Object> impl
     private final Deque<Frame> stack = new ArrayDeque<>();
     private final HashMap<String, simpleLangParser.DecContext> functionTable = new HashMap<>();
 
-    //everytime a function is called pushed to the stack an actviation record, as we pop off we visit the
+    //everytime a function is called pushed to the stack an activation record, as we pop off we visit the
     public Integer visitProgram(simpleLangParser.ProgContext ctx, String[] args) {
         simpleLangParser.DecContext main = null;
         for (simpleLangParser.DecContext dec : ctx.dec()) {
@@ -20,7 +20,6 @@ public class simpleLangInterpreter extends AbstractParseTreeVisitor<Object> impl
             }
         }
         Frame mainStackFrame = new Frame("main");
-        //TODO main args can pass boolean, update to allow this
         for (int j = 0; j < args.length; j++) {
             mainStackFrame.addVariable(main.vardec().IDFR(j).getText(), returnArg(args[j]));
         }
@@ -190,7 +189,7 @@ public class simpleLangInterpreter extends AbstractParseTreeVisitor<Object> impl
 
     @Override
     public Object visitPRINTEXP(simpleLangParser.PRINTEXPContext ctx) {
-        System.out.println(String.valueOf(visit(ctx.exp())));
+        System.out.print(String.valueOf(visit(ctx.exp())));
         return null;
     }
 

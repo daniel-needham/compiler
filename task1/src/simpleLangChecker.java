@@ -5,18 +5,19 @@ import java.util.*;
 
 public class simpleLangChecker extends AbstractParseTreeVisitor<Type> implements simpleLangVisitor<Type> {
 
-    private final Map<String, Map<String, Type>> symbolTable = new HashMap<>();
+    private final Map<String, localFunction> symbolTable = new HashMap<>();
 
     private boolean addToLocalVariablesIfValid(String idfr, String type, String parent) {
         boolean valid = false;
+        if (Type.returnType(type) == Type.UNIT) throw new TypeException().unitVarError();
         if (symbolTable.containsKey(idfr)) {
             throw new TypeException().clashedVarError();
         } else {
-            Map<String, Type> localSymbolTable = symbolTable.get(parent);
-            if (localSymbolTable.containsKey(idfr)) {
+            localFunction localSymbolTable = symbolTable.get(parent);
+            if (localSymbolTable.contains(idfr)) {
                 throw new TypeException().duplicatedVarError();
             } else {
-                localSymbolTable.put(idfr, Type.returnType(type));
+                localSymbolTable.addVariable(idfr, Type.returnType(type));
                 valid = true;
             }
         }
@@ -42,18 +43,15 @@ public class simpleLangChecker extends AbstractParseTreeVisitor<Type> implements
                     throw new TypeException().mainReturnTypeError();
                 }
             }
-            //from here
             if (symbolTable.containsKey(dec.IDFR().getText())) {
                 throw new TypeException().duplicatedFuncError();
             } else {
-                Map<String, Type> localVariableMap = new LinkedHashMap<>();
-                localVariableMap.put(dec.IDFR().getText(), Type.returnType(dec.TYPE().getText()));
-                symbolTable.put(dec.IDFR().getText(), localVariableMap);
+                localFunction localSymbolTable = new localFunction(dec.IDFR().getText(), Type.returnType(dec.TYPE().getText()),
+                        dec.vardec().IDFR().size());
+                symbolTable.put(dec.IDFR().getText(), localSymbolTable);
             }
-            //here
             visit(dec.vardec());
         }
-        //debug
         for (simpleLangParser.DecContext dec : ctx.dec()) {
             visit(dec);
         }
@@ -80,7 +78,6 @@ public class simpleLangChecker extends AbstractParseTreeVisitor<Type> implements
         for (int i = 0; i < ctx.IDFR().size(); i++) {
             String type = ctx.TYPE(i).getText();
             String idfr = ctx.IDFR(i).getText();
-            if (Type.returnType(type) ==  Type.UNIT) throw new TypeException().unitVarError();
             addToLocalVariablesIfValid(idfr, type, parentName);
         }
         return Type.UNIT;
@@ -89,20 +86,19 @@ public class simpleLangChecker extends AbstractParseTreeVisitor<Type> implements
     @Override
     public Type visitBody(simpleLangParser.BodyContext ctx) {
         String parentFuncName = this.getDecParentAsString(ctx);
-        Map<String, Type> localVariableTable = symbolTable.get(parentFuncName);
+        localFunction localSymbolTable = symbolTable.get(parentFuncName);
         for (int i = 0; i < ctx.IDFR().size(); i++) {
             Type instanceVarType = Type.returnType(ctx.TYPE(i).getText());
             String idfr = ctx.IDFR(i).getText();
-            Type variableTableType = localVariableTable.get(idfr);
+            Type variableTableType = localSymbolTable.getType(idfr);
             //name of function defined - throw ex
             if (symbolTable.containsKey(idfr)) throw new TypeException().clashedVarError();
             //add to symbol table if not already initialised
+            if (localSymbolTable.contains(idfr)) throw new TypeException().duplicatedVarError();
+            if (instanceVarType == Type.UNIT) throw new TypeException().unitVarError();
             if (variableTableType == null) {
-                localVariableTable.put(idfr, instanceVarType);
-            } else if (instanceVarType == Type.UNIT){
-                throw new TypeException().unitVarError();
-            }
-            else if (instanceVarType != variableTableType) {
+                localSymbolTable.addVariable(idfr, instanceVarType);
+            } else if (instanceVarType != variableTableType) {
                 throw new TypeException().assignmentError();
             }
         }
@@ -125,8 +121,8 @@ public class simpleLangChecker extends AbstractParseTreeVisitor<Type> implements
     @Override
     public Type visitIDFREXP(simpleLangParser.IDFREXPContext ctx) {
         String parentName = this.getDecParentAsString(ctx);
-        if (symbolTable.get(parentName).containsKey(ctx.IDFR().getText())) {
-            return symbolTable.get(parentName).get(ctx.IDFR().getText());
+        if (symbolTable.get(parentName).contains(ctx.IDFR().getText())) {
+            return symbolTable.get(parentName).getType(ctx.IDFR().getText());
         } else {
             throw new TypeException().undefinedVarError();
         }
@@ -147,11 +143,11 @@ public class simpleLangChecker extends AbstractParseTreeVisitor<Type> implements
     @Override
     public Type visitASSIGNEXP(simpleLangParser.ASSIGNEXPContext ctx) {
         String parentFuncName = this.getDecParentAsString(ctx);
-        Map<String, Type> localVariableTable = symbolTable.get(parentFuncName);
-        Type varType = localVariableTable.get(ctx.IDFR().getText());
+        localFunction localSymbolTable = symbolTable.get(parentFuncName);
+        Type varType = localSymbolTable.getType(ctx.IDFR().getText());
         //add to symbol table if not already initialised
         if (varType == null) {
-            localVariableTable.put(ctx.IDFR().getText(), visit(ctx.exp()));
+            localSymbolTable.addVariable(ctx.IDFR().getText(), visit(ctx.exp()));
         } else if (varType != visit(ctx.exp())) {
             throw new TypeException().assignmentError();
         }
@@ -161,7 +157,7 @@ public class simpleLangChecker extends AbstractParseTreeVisitor<Type> implements
     @Override
     public Type visitBINOPEXP(simpleLangParser.BINOPEXPContext ctx) {
         String parentFuncName = this.getDecParentAsString(ctx);
-        Map<String, Type> localVariableTable = symbolTable.get(parentFuncName);
+        localFunction localSymbolTable  = symbolTable.get(parentFuncName);
         String operator = ctx.BINOP().getText();
         switch (operator) {
             case "+":
@@ -200,7 +196,6 @@ public class simpleLangChecker extends AbstractParseTreeVisitor<Type> implements
     }
 
 
-    //TODO change argumentNumberError exception - refactor as a hashmap of classes (that have variable hashmap)
     @Override
     public Type visitFUNCEXP(simpleLangParser.FUNCEXPContext ctx) {
 
@@ -209,11 +204,11 @@ public class simpleLangChecker extends AbstractParseTreeVisitor<Type> implements
             //check arguments match
             //check type of each argument against the variables already defined
             // -1 to account for function type
-            if (ctx.args().exp().size() != (symbolTable.get(functionIDFR).size() - 1)) {
+            if (ctx.args().exp().size() != symbolTable.get(functionIDFR).getNoOfArguments()) {
                 throw new TypeException().argumentNumberError();
             }
             visit(ctx.args());
-            return symbolTable.get(functionIDFR).get(functionIDFR);
+            return symbolTable.get(functionIDFR).getType(functionIDFR);
         } else {
             throw new TypeException().undefinedFuncError();
         }
@@ -292,8 +287,8 @@ public class simpleLangChecker extends AbstractParseTreeVisitor<Type> implements
     @Override
     public Type visitArgs(simpleLangParser.ArgsContext ctx) {
         String funcName = ((simpleLangParser.FUNCEXPContext) ctx.getParent()).IDFR().getText();
-        Map<String, Type> localVariableTable = symbolTable.get(funcName);
-        List<Type> variableTypes = localVariableTable.values().stream().toList();
+        localFunction localSymbolTable = symbolTable.get(funcName);
+        List<Type> variableTypes = localSymbolTable.getLocalVariableTypes().stream().toList();
         for (int i = 0; i < ctx.exp().size(); i++) {
             if (visit(ctx.exp(i)) != variableTypes.get(i + 1)) {
                 throw new TypeException().argumentError();
